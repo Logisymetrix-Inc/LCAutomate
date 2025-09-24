@@ -9,38 +9,41 @@ from src.LCAutomate.process_hierarchy.process_hierarchy import ProcessHierarchy
 from src.LCAutomate.calculation.calculation import Calculation
 from src.LCAutomate.product_system.product_system import ProductSystem
 
-parser = argparse.ArgumentParser(prog="LCAutomate")
 
-# TODO: Need 2 earlier steps:
-#       1. Create a kind of template file for each of the replicated processes with the key columns plus a tag column
-#       2. Merge the template file with the actual data file which also has a tag column
+def main():
+    parser = argparse.ArgumentParser(prog="LCAutomate")
 
-parser.add_argument("operation", type=str, 
-                    choices=["model", "process-hierarchy", "product-system", "calculation"],
-                    help="Perform the chosen LCAutomate operation")
-parser.add_argument("-i", "--input-root-folder", type=str,
-                    help="Root folder for automation")
-parser.add_argument("-r", "--restart", action="store_true", default=False,
-                    help="Restart this operation, ignoring previous state (default False)")
-parser.add_argument("-c", "--calculation-type", type=str,
-                    choices=CalculationTypeNames.list(), default=CalculationTypeNames.UPSTREAM_ANALYSIS,
-                    help=f"Calculation type for the calculation operation (default '{CalculationTypeNames.UPSTREAM_ANALYSIS}')")
-parser.add_argument("-im", "--impact-assessment-method", type=str, default=DEFAULT_IMPACT_ASSESSMENT_METHOD,
-                    help=f"Impact assessment method for the calculation operation (default '{DEFAULT_IMPACT_ASSESSMENT_METHOD}')")
-parser.add_argument("-n", "--number-of-iterations", type=int, default=DEFAULT_NUMBER_OF_ITERATIONS,
-                    help=f"Number of iterations for Monte Carlo simulation (default {DEFAULT_NUMBER_OF_ITERATIONS}) (ignored for other calculation types)")
+    # TODO: Need 2 earlier steps:
+    #       1. Create a kind of template file for each of the replicated processes with the key columns plus a tag column
+    #       2. Merge the template file with the actual data file which also has a tag column
 
-# This is required to do pre-parsing of the arguments because argparse can't handle an argument value containing spaces!
-keywords = [
-    "model", "process-hierarchy", "product-system", "calculation",
-    "-i", "--input-root-folder",
-    "-r", "--restart",
-    "-c", "--calculation-type",
-    "-im", "--impact-assessment-method",
-    "-n", "--number-of-iterations",
-]
+    parser.add_argument("operation", type=str, 
+                        choices=["model", "process-hierarchy", "product-system", "calculation"],
+                        help="Perform the chosen LCAutomate operation")
+    parser.add_argument("-i", "--input-root-folder", type=str,
+                        help="Root folder for automation")
+    parser.add_argument("-r", "--restart", action="store_true", default=False,
+                        help="Restart this operation, ignoring previous state (default False)")
+    parser.add_argument("-c", "--calculation-type", type=str,
+                        choices=CalculationTypeNames.list(), default=CalculationTypeNames.UPSTREAM_ANALYSIS,
+                        help=f"Calculation type for the calculation operation (default '{CalculationTypeNames.UPSTREAM_ANALYSIS}')")
+    parser.add_argument("-im", "--impact-assessment-method", type=str, default=DEFAULT_IMPACT_ASSESSMENT_METHOD,
+                        help=f"Impact assessment method for the calculation operation (default '{DEFAULT_IMPACT_ASSESSMENT_METHOD}')")
+    parser.add_argument("-n", "--number-of-iterations", type=int, default=DEFAULT_NUMBER_OF_ITERATIONS,
+                        help=f"Number of iterations for Monte Carlo simulation (default {DEFAULT_NUMBER_OF_ITERATIONS}) (ignored for other calculation types)")
 
-if __name__ == '__main__':
+    # This is required to do pre-parsing of the arguments because argparse can't handle an argument value containing spaces!
+    keywords = [
+        "model", "process-hierarchy", "product-system", "calculation",
+        "-i", "--input-root-folder",
+        "-r", "--restart",
+        "-c", "--calculation-type",
+        "-im", "--impact-assessment-method",
+        "-n", "--number-of-iterations",
+    ]
+
+
+
     # Here is the pre-parsing step mentioned above
     sys_args = sys.argv[1:]
     modified_args = []
@@ -98,3 +101,7 @@ if __name__ == '__main__':
 
     done = module.do()
     sys.exit(0) if done else sys.exit(1)
+
+
+if __name__ == '__main__':
+    main()
