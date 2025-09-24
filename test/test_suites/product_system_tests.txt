@@ -1,0 +1,2 @@
+LCAutomate -i resources/CRSC_Barley_No_SOC-simplified/ product-system --restart
+LCAutomate -i resources/CRSC_Barley_No_SOC-simplified/ product-system

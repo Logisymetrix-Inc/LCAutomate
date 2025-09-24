@@ -1,0 +1,2 @@
+LCAutomate -i resources/CRSC_Barley_No_SOC-simplified/ model --restart
+LCAutomate -i resources/CRSC_Barley_No_SOC-simplified/ model

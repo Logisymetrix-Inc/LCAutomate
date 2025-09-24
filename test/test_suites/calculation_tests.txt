@@ -1,0 +1,4 @@
+LCAutomate -i resources/CRSC_Barley_No_SOC-simplified/ calculation --restart
+LCAutomate -i resources/CRSC_Barley_No_SOC-simplified/ calculation
+LCAutomate -i resources/CRSC_Barley_No_SOC-simplified/ --impact-assessment-method "IPCC 2021 AR6" calculation --restart
+LCAutomate -i resources/CRSC_Barley_No_SOC-simplified/ --impact-assessment-method "IPCC 2021 AR6" calculation
